@@ -179,11 +179,11 @@ class website_marketplace_dashboard(http.Controller):
                 'url_handler':url_handler,
                 'seller': True,
             })
-            internal_group = request.env.ref('base.group_user')
+            # internal_group = request.env.ref('base.group_user')
             portal_group = request.env.ref('base.group_portal')
-            if portal_group and internal_group:
+            if portal_group:
                 portal_group.sudo().write({"users": [(3, current_user.id, 0)]})
-                internal_group.sudo().write({"users": [(4, current_user.id, 0)]})
+                # internal_group.sudo().write({"users": [(4, current_user.id, 0)]})
             draft_seller_group_id = request.env['ir.model.data'].sudo().check_object_reference('odoo_marketplace', 'marketplace_draft_seller_group')[1]
             groups_obj = request.env["res.groups"].browse(draft_seller_group_id)
             if groups_obj:
